@@ -134,12 +134,35 @@ npm run dev
 
 每个项目应包含独立的 README.md 说明文档。
 
+## 📖 详细文档
+
+- **[项目结构说明](docs/PROJECT_STRUCTURE.md)** - 详细的项目分类管理规范
+- **[项目访问指南](ACCESS_GUIDE.md)** - 如何访问和运行项目
+- **[Git上传指南](GIT_UPLOAD_GUIDE.md)** - 如何将项目上传到GitHub
+- **[Git快速上传](GIT_QUICK_START.md)** - 一键上传速查表
+- **[项目验证清单](VERIFY_STRUCTURE.md)** - 项目结构验证和检查
+
 ## 贡献指南
 
 1. Fork 本仓库
 2. 在相应功能目录下开发
 3. 提交 Pull Request
 4. 遵循现有代码规范
+
+## 🚀 Git 上传到 GitHub
+
+如果要将本地上传到 GitHub，请参考 **[Git上传指南](GIT_UPLOAD_GUIDE.md)**：
+
+```bash
+# 1. 添加所有更改
+git add .
+
+# 2. 提交更改
+git commit -m "feat: 重构项目结构，按功能分类管理"
+
+# 3. 推送到远程
+git push origin chore-boke-categorize-projects-by-feature
+```
 
 ---
 
