@@ -5,6 +5,9 @@ echo "  视频管理系统前端 - 启动脚本"
 echo "=================================="
 echo ""
 
+# 切换到前端目录
+cd ../frontend
+
 # 检查 Node.js 是否安装
 if ! command -v node &> /dev/null; then
     echo "❌ 错误: 未检测到 Node.js，请先安装 Node.js"

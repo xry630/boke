@@ -1,13 +1,13 @@
-# 视频管理系统
+# Boke 项目仓库
 
-一个完整的视频管理解决方案，包含 .NET Core 后端和 Vue 3 前端。
+这是一个按功能分类管理的多项目仓库，包含视频管理系统及相关组件。
 
 ## 项目结构
 
 ```
 .
-├── video-master/          # .NET Core 后端
-│   └── video-master/      # ASP.NET Core 应用
+├── backend/               # 后端项目
+│   └── video-master/      # .NET Core 视频管理后端
 │       ├── src/
 │       │   ├── Video.Domain/              # 领域模型
 │       │   ├── Video.Domain.Shared/       # 共享定义
@@ -17,74 +17,81 @@
 │       │   └── Video.HttpApi.Host/        # HTTP API 主机
 │       └── ...
 │
-└── frontend/              # Vue 3 前端
-    ├── src/
-    │   ├── api/          # API 接口
-    │   ├── components/   # 组件
-    │   ├── router/       # 路由
-    │   ├── stores/       # 状态管理
-    │   ├── utils/        # 工具函数
-    │   └── views/        # 页面视图
-    ├── package.json
-    └── vite.config.js
+├── frontend/              # 前端项目
+│   ├── src/
+│   │   ├── api/          # API 接口
+│   │   ├── components/   # 组件
+│   │   ├── router/       # 路由
+│   │   ├── stores/       # 状态管理
+│   │   ├── utils/        # 工具函数
+│   │   └── views/        # 页面视图
+│   ├── package.json
+│   └── vite.config.js
+│
+├── docs/                 # 文档
+│   ├── README.md                     # 项目总体说明
+│   ├── FRONTEND_GUIDE.md            # 前端系统指南
+│   ├── PROJECT_OVERVIEW.md          # 项目概览
+│   ├── QUICKSTART.md                # 快速开始
+│   ├── VERSION.md                   # 版本信息
+│   ├── 使用说明.md                   # 中文使用教程
+│   └── 项目检查.md                   # 项目检查清单
+│
+├── configs/              # 配置文件
+│   └── PROJECT_SUMMARY.txt         # 项目总结
+│
+├── deployment/           # 部署相关
+│   ├── docker-compose.yml           # Docker Compose 配置
+│   ├── Dockerfile                   # Docker 镜像构建
+│   ├── nginx.conf.example           # Nginx 配置示例
+│   ├── DEPLOYMENT.md                # 部署指南
+│   └── 启动脚本.sh                   # 启动脚本
+│
+└── .gitignore           # Git 忽略文件
 ```
 
-## 技术栈
+## 功能分类
 
-### 后端
-- **框架**: ASP.NET Core 6.0
-- **架构**: 分层架构（领域驱动设计）
-- **ORM**: Entity Framework Core
-- **数据库**: MySQL
-- **缓存**: Redis (FreeRedis)
-- **认证**: JWT Bearer
-- **日志**: Serilog
-- **文档**: Swagger/OpenAPI
+### 🖥️ 后端项目 (backend/)
+- **video-master**: ASP.NET Core 6.0 视频管理后端
+  - 分层架构设计
+  - Entity Framework Core + MySQL
+  - Redis 缓存
+  - JWT 认证
+  - Swagger API 文档
 
-### 前端
-- **框架**: Vue 3
-- **路由**: Vue Router 4
-- **状态管理**: Pinia
-- **HTTP客户端**: Axios
-- **构建工具**: Vite
-- **UI**: 自定义响应式设计
+### 🌐 前端项目 (frontend/)
+- **Vue 3 应用**: 现代化前端界面
+  - Vue Router 4 路由管理
+  - Pinia 状态管理
+  - Axios HTTP 客户端
+  - 响应式设计
 
-## 功能特性
+### 📚 文档 (docs/)
+- 项目说明文档
+- 使用指南
+- 部署教程
+- API 文档链接
 
-### 已实现功能
-- ✅ 用户注册（含验证码）
-- ✅ 用户登录
-- ✅ JWT 认证
-- ✅ 角色权限管理
-- ✅ 视频发布与审核
-- ✅ 视频分类管理
-- ✅ 文件上传/删除
-- ✅ 关注/取关功能
+### ⚙️ 配置 (configs/)
+- 项目配置文件
+- 环境设置
+- 构建配置
 
-### 前端功能
-- ✅ 响应式登录界面
-- ✅ 注册页面（含验证码验证）
-- ✅ JWT Token 自动管理
-- ✅ 路由守卫
-- ✅ 用户信息展示
+### 🚀 部署 (deployment/)
+- Docker 容器化配置
+- Nginx 反向代理配置
+- 部署脚本和指南
 
 ## 快速开始
-
-### 前置要求
-- .NET 6.0 SDK
-- Node.js 16+
-- MySQL 5.7+
-- Redis (可选)
 
 ### 1. 启动后端
 
 ```bash
-cd video-master/video-master/src/Video.HttpApi.Host
+cd backend/video-master/src/Video.HttpApi.Host
 dotnet restore
 dotnet run
 ```
-
-后端将运行在 `http://localhost:5000`
 
 ### 2. 启动前端
 
@@ -94,155 +101,68 @@ npm install
 npm run dev
 ```
 
-前端将运行在 `http://localhost:5173`
-
 ### 3. 访问应用
 
-打开浏览器访问 `http://localhost:5173`
+- 前端应用: http://localhost:5173
+- 后端 API: http://localhost:5000
+- API 文档: http://localhost:5000/swagger
 
-## 详细文档
+## 技术栈
 
-- [前端使用指南](./FRONTEND_GUIDE.md) - 前端系统详细说明
-- [前端中文说明](./frontend/使用说明.md) - 中文使用教程
-- [前端 README](./frontend/README.md) - 前端项目说明
-
-## API 文档
-
-启动后端后，访问 Swagger 文档: `http://localhost:5000/swagger`
-
-主要 API 端点：
-
-### 认证
-- `POST /api/Auth` - 用户登录
-- `POST /api/Auth/register` - 用户注册
-
-### 验证码
-- `GET /api/Code` - 获取验证码
-
-### 用户管理
-- `GET /api/UserInfo` - 获取用户信息
-- `PUT /api/UserInfo` - 更新用户信息
-
-### 视频管理
-- `GET /api/Video` - 获取视频列表
-- `POST /api/Video` - 发布视频
-
-### 文件管理
-- `POST /api/File` - 上传文件
-- `DELETE /api/File/{id}` - 删除文件
-
-## 开发指南
-
-### 后端开发
-
-```bash
-# 还原依赖
-dotnet restore
-
-# 运行
-dotnet run
-
-# 构建
-dotnet build
-
-# 发布
-dotnet publish -c Release
-```
-
-### 前端开发
-
-```bash
-# 安装依赖
-npm install
-
-# 开发模式
-npm run dev
-
-# 生产构建
-npm run build
-
-# 预览构建
-npm run preview
-```
-
-## 部署
-
-### 使用 Docker
-
-```bash
-# 构建前端镜像
-cd frontend
-docker build -t video-frontend .
-
-# 运行前端容器
-docker run -d -p 8080:80 video-frontend
-
-# 使用 docker-compose
-docker-compose up -d
-```
-
-### 使用 Nginx
-
-参考 `frontend/nginx.conf.example` 配置文件。
-
-## 配置
-
-### 后端配置
-
-编辑 `appsettings.json`:
-- 数据库连接字符串
-- Redis 连接
-- JWT 配置
-- CORS 设置
-
-### 前端配置
-
-编辑 `frontend/vite.config.js`:
-- API 代理地址
-- 端口配置
-
-## 环境变量
+### 后端
+- ASP.NET Core 6.0
+- Entity Framework Core
+- MySQL + Redis
+- JWT Bearer 认证
+- Serilog 日志
 
 ### 前端
-```bash
-# .env.development
-VITE_API_BASE_URL=/api
+- Vue 3 + Composition API
+- Vue Router 4
+- Pinia 状态管理
+- Axios + Vite
 
-# .env.production
-VITE_API_BASE_URL=/api
-```
+## 添加新项目
+
+当需要添加新的不同项目时，请按以下规则组织：
+
+1. **后端项目** → `backend/` 目录
+2. **前端项目** → `frontend/` 目录  
+3. **移动端项目** → `mobile/` 目录
+4. **工具项目** → `tools/` 目录
+5. **共享库** → `shared/` 目录
+
+每个项目应包含独立的 README.md 说明文档。
+
+## 📖 详细文档
+
+- **[项目结构说明](docs/PROJECT_STRUCTURE.md)** - 详细的项目分类管理规范
+- **[项目访问指南](ACCESS_GUIDE.md)** - 如何访问和运行项目
+- **[Git上传指南](GIT_UPLOAD_GUIDE.md)** - 如何将项目上传到GitHub
+- **[Git快速上传](GIT_QUICK_START.md)** - 一键上传速查表
+- **[项目验证清单](VERIFY_STRUCTURE.md)** - 项目结构验证和检查
 
 ## 贡献指南
 
-欢迎提交 Issue 和 Pull Request！
-
 1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+2. 在相应功能目录下开发
+3. 提交 Pull Request
+4. 遵循现有代码规范
 
-## 常见问题
+## 🚀 Git 上传到 GitHub
 
-### Q: 如何解决 CORS 跨域问题？
-A: 前端开发环境已配置代理，生产环境使用 Nginx 反向代理。
+如果要将本地上传到 GitHub，请参考 **[Git上传指南](GIT_UPLOAD_GUIDE.md)**：
 
-### Q: Token 在哪里存储？
-A: Token 存储在浏览器的 localStorage 中。
+```bash
+# 1. 添加所有更改
+git add .
 
-### Q: 如何修改后端 API 地址？
-A: 编辑 `frontend/vite.config.js` 中的 proxy 配置。
+# 2. 提交更改
+git commit -m "feat: 重构项目结构，按功能分类管理"
 
-### Q: 数据库如何初始化？
-A: 参考后端项目的迁移文件和初始化脚本。
-
-## 许可证
-
-MIT License
-
-## 联系方式
-
-如有问题，请提交 Issue 或联系开发团队。
+# 3. 推送到远程
+git push origin chore-boke-categorize-projects-by-feature
+```
 
 ---
 

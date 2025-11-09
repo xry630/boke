@@ -4,6 +4,9 @@
 
 ### 1. 检查项目
 ```bash
+# 进入前端目录
+cd frontend
+
 # 确保项目可以正常构建
 npm run build
 
@@ -21,6 +24,7 @@ ls -la dist/
 
 #### 步骤 1: 构建项目
 ```bash
+cd frontend
 npm run build
 ```
 
@@ -86,6 +90,7 @@ sudo systemctl reload nginx
 
 #### 步骤 1: 构建镜像
 ```bash
+cd frontend
 docker build -t video-frontend:latest .
 ```
 
@@ -107,6 +112,7 @@ docker logs -f video-frontend
 
 #### 步骤 1: 启动服务
 ```bash
+cd deployment
 docker-compose up -d
 ```
 
@@ -124,6 +130,7 @@ docker-compose logs -f
 
 #### 步骤 1: 构建项目
 ```bash
+cd frontend
 npm run build
 ```
 
@@ -255,6 +262,9 @@ listen 443 ssl http2;
 
 ### 4. 预压缩
 ```bash
+# 进入前端目录
+cd frontend
+
 # 安装 gzip 插件
 npm install -D vite-plugin-compression
 
