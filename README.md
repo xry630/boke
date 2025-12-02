@@ -140,6 +140,7 @@ npm run dev
 - **[项目访问指南](ACCESS_GUIDE.md)** - 如何访问和运行项目
 - **[Git上传指南](GIT_UPLOAD_GUIDE.md)** - 如何将项目上传到GitHub
 - **[Git快速上传](GIT_QUICK_START.md)** - 一键上传速查表
+- **[分支管理建议](BRANCH_MANAGEMENT.md)** - 分支清理和管理建议
 - **[项目验证清单](VERIFY_STRUCTURE.md)** - 项目结构验证和检查
 
 ## 贡献指南
