@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Video.Domain.Shared
 {
@@ -11,7 +11,7 @@ namespace Video.Domain.Shared
 
         public BusinessException(string message, int code = 400) : base(message)
         {
-
+            Code = code;
         }
     }
 }

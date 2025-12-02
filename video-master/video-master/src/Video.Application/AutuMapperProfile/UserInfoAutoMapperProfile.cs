@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Video.Application.Contract;
 using Video.Application.Contract.UserInfos.Dtos;
 using Video.Domain;
@@ -12,8 +12,8 @@ namespace Video.Application.AutuMapperProfile
         {
             CreateMap<UserInfo, UserInfoDto>().ReverseMap();
 
-            CreateMap<UserInfoRoleView, UserInfoRoleDto>();
-            CreateMap<Role, RoleDto>();
+            CreateMap<UserInfoRoleView, UserInfoRoleDto>().ReverseMap();
+            CreateMap<Role, RoleDto>().ReverseMap();
 
             CreateMap<UserInfo, UserInfoRoleDto>();
             CreateMap<RegisterInput, UserInfo>();
