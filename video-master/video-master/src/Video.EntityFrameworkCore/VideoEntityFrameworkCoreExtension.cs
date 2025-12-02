@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Simple.EntityFrameworkCore.MySql;
+using Microsoft.Extensions.DependencyInjection;
+using Simple.EntityFrameworkCore.Sqlite;
 using Video.Domain.Users;
 using Video.Domain.Videos;
 using Video.Domain.Users;
@@ -12,7 +12,7 @@ namespace Video.Domain
         public static IServiceCollection AddVideoEntityFrameworkCore(this IServiceCollection services)
         {
             // 注入efcore
-            services.AddMySqlEntityFrameworkCore<VideoDbContext>("Default");
+            services.AddSqliteEntityFrameworkCore<VideoDbContext>("Default");
 
             services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 

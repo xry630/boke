@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Simple.EntityFrameworkCore;
 using Video.Domain;
 using Video.Domain.Users;
@@ -33,12 +33,11 @@ namespace Video.Domain
             builder.Entity<UserInfo>(u =>
             {
                 u.ToTable("UserInfos");
-                u.HasComment("用户表");
 
                 u.HasKey(x => x.Id);
                 u.HasIndex(x => x.Id);
 
-                u.Property(x => x.Username).HasComment("用户名");
+                u.Property(x => x.Username);
                 u.HasIndex(x => x.Username).IsUnique();
 
             });
@@ -46,7 +45,6 @@ namespace Video.Domain
             builder.Entity<Role>(x =>
             {
                 x.ToTable("Roles");
-                x.HasComment("角色表");
 
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
@@ -56,7 +54,6 @@ namespace Video.Domain
             builder.Entity<UserRole>(x =>
             {
                 x.ToTable("UserRoles");
-                x.HasComment("用户角色配置表");
 
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
@@ -68,7 +65,6 @@ namespace Video.Domain
             {
 
                 x.ToTable("Videos");
-                x.HasComment("视频表");
 
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
@@ -82,7 +78,6 @@ namespace Video.Domain
             builder.Entity<Like>(x =>
             {
                 x.ToTable("Likes");
-                x.HasComment("点赞表");
 
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
@@ -93,7 +88,6 @@ namespace Video.Domain
             builder.Entity<Comment>(x =>
             {
                 x.ToTable("Comments");
-                x.HasComment("评论表");
 
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
@@ -104,7 +98,6 @@ namespace Video.Domain
             builder.Entity<Classify>(x =>
             {
                 x.ToTable("Classifys");
-                x.HasComment("视频分类表");
 
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
@@ -114,7 +107,6 @@ namespace Video.Domain
             builder.Entity<BeanVermicelli>(x =>
             {
                 x.ToTable("BeanVermicellis");
-                x.HasComment("关注表");
                 x.HasKey(x => x.Id);
                 x.HasIndex(x => x.Id);
                 x.HasIndex(x => x.UserId);
