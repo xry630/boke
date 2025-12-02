@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Simple.EntityFrameworkCore.Core;
 using Simple.EntityFrameworkCore.Extensions;
 using System.Linq;
@@ -94,12 +94,21 @@ namespace Video.Domain.Users
 
         public async Task DeleteAsync(IEnumerable<Guid> ids)
         {
-            await _dbContext.Database.ExecuteSqlRawAsync("DELETE FROM UserInfos WHERE Id IN({0})", string.Join(',',ids));
+            var idsList = ids.ToList();
+            var entities = await _dbContext.UserInfo.Where(x => idsList.Contains(x.Id)).ToListAsync();
+            _dbContext.UserInfo.RemoveRange(entities);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task EnableAsync(IEnumerable<Guid> ids, bool enable = true)
         {
-            await _dbContext.Database.ExecuteSqlRawAsync("UPDATE UserInfos SET Enable = {0} WHERE Id IN ({1})", enable,string.Join(',', ids));
+            var idsList = ids.ToList();
+            var entities = await _dbContext.UserInfo.Where(x => idsList.Contains(x.Id)).ToListAsync();
+            foreach (var entity in entities)
+            {
+                entity.Enable = enable;
+            }
+            await _dbContext.SaveChangesAsync();
         }
 
         private IQueryable<UserInfo> CreateQueryable(string? keywords, DateTime? startTime, DateTime? endTime)
