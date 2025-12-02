@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FreeRedis;
 using Simple.EntityFrameworkCore.Core.Base;
 using Video.Application.Contract.Base;
@@ -74,25 +74,37 @@ namespace Video.Application.UserInfos
         /// <inheritdoc/>
         public async Task<UserInfoRoleDto> RegisterAsync(RegisterInput input)
         {
-            var code = await _redisClient.GetAsync<string>($"{CodeType.Register}:{input.Username}");
-            var s = $"{CodeType.Register}:{input.Username}";
-            if (code != input.Code)
+            try
             {
-                throw new BusinessException("验证码错误");
-            }
+                var expectedKey = $"{CodeType.Register}:{input.Username}";
+                var code = await _redisClient.GetAsync<string>(expectedKey);
+                
+                // For debugging: log the lookup
+                Console.WriteLine($"Looking for verification code: Key={expectedKey}, Found={code}, Input={input.Code}");
+                
+                if (code != input.Code)
+                {
+                    throw new BusinessException($"验证码错误。期望：{code}，实际：{input.Code}");
+                }
 
-            if (await _userInfoRepository.IsExistAsync(x => x.Username == input.Username))
+                if (await _userInfoRepository.IsExistAsync(x => x.Username == input.Username))
+                {
+                    throw new BusinessException("用户名已存在");
+                }
+
+                var data = _mapper.Map<UserInfo>(input);
+
+                data = await _userInfoRepository.InsertAsync(data);
+
+                await _unitOfWork.SaveChangesAsync();
+
+                return _mapper.Map<UserInfoRoleDto>(data);
+            }
+            catch (Exception ex) when (!(ex is BusinessException))
             {
-                throw new BusinessException("用户名已存在");
+                Console.WriteLine($"Redis error in UserInfoService.RegisterAsync: {ex.Message}");
+                throw new BusinessException("验证码验证失败，请重新获取验证码");
             }
-
-            var data = _mapper.Map<UserInfo>(input);
-
-            data = await _userInfoRepository.InsertAsync(data);
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return _mapper.Map<UserInfoRoleDto>(data);
         }
 
         /// <inheritdoc/>

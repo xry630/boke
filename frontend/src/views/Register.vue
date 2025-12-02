@@ -139,7 +139,7 @@ const getVerificationCode = async () => {
   try {
     const code = await codeApi.getCode({
       value: form.value.username,
-      type: 0
+      type: 'Register'
     })
 
     success.value = `验证码已发送：${code}`
