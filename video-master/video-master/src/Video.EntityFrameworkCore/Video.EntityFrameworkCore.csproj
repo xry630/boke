@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\efcore\Simple.EntityFrameworkCore.MySql\Simple.EntityFrameworkCore.MySql.csproj" />
+    <ProjectReference Include="..\efcore\Simple.EntityFrameworkCore.Sqlite\Simple.EntityFrameworkCore.Sqlite.csproj" />
     <ProjectReference Include="..\Video.Domain\Video.Domain.csproj" />
   </ItemGroup>
 
