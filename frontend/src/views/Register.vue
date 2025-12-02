@@ -175,16 +175,31 @@ const handleRegister = async () => {
   loading.value = true
 
   try {
-    const token = await authApi.register({
+    const response = await authApi.register({
       name: form.value.name,
       username: form.value.username,
       password: form.value.password,
       code: form.value.code,
       avatar: form.value.avatar
     })
+    
+    console.log('Register response:', response, 'Type:', typeof response)
 
-    authStore.setToken(token)
-    router.push('/')
+    // Handle different response formats
+    let token = response
+    if (typeof response === 'object' && response !== null) {
+      // If response is an object, try to extract token from common properties
+      token = response.token || response.data || response.accessToken || response.jwt
+    }
+    
+    console.log('Extracted token:', token, 'Type:', typeof token)
+
+    if (token && typeof token === 'string') {
+      authStore.setToken(token)
+      router.push('/')
+    } else {
+      throw new Error('Invalid token received from server')
+    }
   } catch (err) {
     error.value = err.message || '注册失败，请重试'
   } finally {

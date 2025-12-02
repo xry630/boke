@@ -69,13 +69,28 @@ const handleLogin = async () => {
   loading.value = true
 
   try {
-    const token = await authApi.login({
+    const response = await authApi.login({
       username: form.value.username,
       password: form.value.password
     })
+    
+    console.log('Login response:', response, 'Type:', typeof response)
 
-    authStore.setToken(token)
-    router.push('/')
+    // Handle different response formats
+    let token = response
+    if (typeof response === 'object' && response !== null) {
+      // If response is an object, try to extract token from common properties
+      token = response.token || response.data || response.accessToken || response.jwt
+    }
+    
+    console.log('Extracted token:', token, 'Type:', typeof token)
+
+    if (token && typeof token === 'string') {
+      authStore.setToken(token)
+      router.push('/')
+    } else {
+      throw new Error('Invalid token received from server')
+    }
   } catch (err) {
     error.value = err.message || '登录失败，请检查用户名和密码'
   } finally {
