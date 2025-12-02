@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!token.value)
 
   function setToken(newToken) {
+    console.log('Setting token:', newToken, 'Type:', typeof newToken)
     token.value = newToken
     if (newToken) {
       localStorage.setItem('token', newToken)
@@ -19,6 +20,12 @@ export const useAuthStore = defineStore('auth', () => {
 
   function parseToken(jwtToken) {
     try {
+      // Ensure jwtToken is a string
+      if (typeof jwtToken !== 'string') {
+        console.error('Token is not a string:', jwtToken)
+        return
+      }
+      
       const base64Url = jwtToken.split('.')[1]
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
       const jsonPayload = decodeURIComponent(
